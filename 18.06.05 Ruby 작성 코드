@@ -124,5 +124,3 @@ CNY = data.css("#AllDsp1 > tr:nth-child(10) > td:nth-child(2)")
 #puts USD.text, JPY.text, CNY.text
 
 puts "현재 환율은 \n달러 #{USD.text} / 엔 #{JPY.text} / 위안화 #{CNY.text} 입니다."
-
-
