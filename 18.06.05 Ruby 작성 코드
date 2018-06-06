@@ -1,0 +1,124 @@
+# 루비챗봇 작성 내용
+
+1. 안녕-------------------------------------------------------------------------
+
+puts '안녕하세요!'
+
+2. 점심메뉴-------------------------------------------------------------------------
+
+menu = ["20층", "순남시래기", "양자강", "한우"]
+lunch = menu.sample
+puts lunch
+
+3. 메뉴-------------------------------------------------------------------------
+
+menu = ["20층", "버거킹", "순대국", "김밥"]
+
+lunch, dinner = menu.sample(2)
+result = menu.sample(2)
+
+print("점심에는 " + lunch + ", 저녁에는 " + dinner + "을 드세요\n")
+puts "점심에는 " + result[0]
+puts "저녁에는 " + result[1]
+
+4. 로또-------------------------------------------------------------------------
+
+# 로또
+# 출력 : 이번주 추천 로또 번호 6자리
+number = (1..45).to_a
+lotto = number.sample(6).sort
+
+puts "이번주 추천 로또 번호 6자리" 
+puts lotto #+ "입니다." 이건 안됨.
+
+numbers = *(1..45)
+lotto = numbers.sample(6).sort
+
+puts "이번주 추천 로또 숫자는"
+puts lotto.to_s + "입니다."
+#number2 = (rand() * 45).to_i(6)
+#lotto = number2.sample(6).sort
+#puts lotto
+
+
+5. 미세먼지-------------------------------------------------------------------------
+
+require 'httparty'  # import
+url = URI.encode("http://openapi.airkorea.or.kr/openapi/services/rest/ArpltnInforInqireSvc/getMsrstnAcctoRltmMesureDnsty?stationName=강남구&dataTerm=MONTH&numOfRows=100&ServiceKey=")+key
+response = HTTParty.get(url)  # url 에 있는 걸 가져오겠다.
+dust = response['response']['body']['items']['item'][0]['pm10Value'].to_i
+puts response
+               # .to_i
+# 미세먼지 
+# 출력 : case문을 이용
+# 0 ~ 30 : 좋음
+# 31 ~ 80 : 보통
+# 81 ~ 150 : 나쁨
+# 151 ~ : 매우 나쁨
+puts dust
+
+case dust
+  when 0..30 
+    puts "미세먼지  : " + dust.to_s + " 으로 좋음"
+  when 31..80 
+    puts "미세먼지  : " + dust.to_s + " 으로 보통"
+  when 81..150
+    puts "미세먼지  : " + dust.to_s + " 으로 나쁨"
+  else
+    puts "미세먼지  : " + dust.to_s + " 으로 매우나쁨"
+end  
+
+#  http://openapi.airkorea.or.kr/
+#  openapi/services/rest/   오픈API rest 방식
+#  ArpltnInforInqireSvc/
+#  getMsrstnAcctoRltmMesureDnsty         ?  이 앞까지 주소로 보냄
+#  ?stationName=
+#  강남구
+#  &dataTerm=MONTH&numOfRows=100&ServiceKey=
+
+
+6. 코스피-------------------------------------------------------------------------
+
+#hyenCost > b   :  개발자도구로 kospi 지수 클릭해서 copy selector 함
+
+require 'httparty'
+require 'nokogiri'
+# 응답을 받을 response 생성
+response = HTTParty.get('http://finance.daum.net/quote/kospi.daum')
+#puts response
+
+kospi = Nokogiri::HTML(response)
+#css 셀렉터로 노코기리 활용할 때는 / 노코기리로 파싱한 것을 가져오겠다.
+
+result = kospi.css("#hyenCost > b")
+
+#puts result
+puts result.text
+#           "안녕하세요.  #{변수명} 입니다. " - 써주면 + 없이 내용 출력 가능
+#           ' #{} ' - 에러
+
+# 노코기리를 왜 쓰느냐?   => http
+
+# xml은 노코기리 안쓰고 "미세먼지" 처럼 쓰일 수 있음.
+# 은행의 환율 크롤링 해봐도 될듯
+
+
+7. 환율-------------------------------------------------------------------------
+
+require 'httparty'
+require 'nokogiri'
+
+response = HTTParty.get('https://okbfex.kbstar.com/quics?page=C015690&QSL=F')
+
+data = Nokogiri::HTML(response)
+#css 셀렉터로 노코기리 활용할 때는 / 노코기리로 파싱한 것을 가져오겠다.
+
+USD = data.css("#AllDsp1 > tr:nth-child(1) > td:nth-child(2)")
+JPY = data.css("#AllDsp1 > tr:nth-child(2) > td:nth-child(2)")
+CNY = data.css("#AllDsp1 > tr:nth-child(10) > td:nth-child(2)")
+
+#puts USD.text, JPY.text, CNY.text
+
+puts "현재 환율은 \n달러 #{USD.text} / 엔 #{JPY.text} / 위안화 #{CNY.text} 입니다."
+
+
