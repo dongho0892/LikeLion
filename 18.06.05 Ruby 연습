@@ -1,0 +1,16 @@
+# 루비 챗봇 개별 연습
+# 해외증시  관련 챗봇 만들어보기
+
+require "open-uri"
+require 'nokogiri'
+
+url = "http://finance.daum.net/quote/global/commodity.daum?ric=GOLD"  
+doc = Nokogiri::HTML(doc = open(url))  
+puts doc
+dow = doc.xpath('//*[@id="cust1"]/table/tbody/tr[2]/td[2]')
+puts dow
+#puts USD.text, JPY.text, CNY.text
+#puts "현재 환율은 \n달러 #{USD.text} / 엔 #{JPY.text} / 위안화 #{CNY.text} 입니다."
+
+----------------------------
+다음 사이트에서는 크롤링을 못해옴    
