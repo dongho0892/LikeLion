@@ -13,3 +13,6 @@
   Codeacademy   - Html CSS
   
   cd : 디렉토리 변경 / pwd : 작업 디렉토리 / mkdir : 디렉토리 (폴더) / touch : 파일 생성
+
+### 18.06.08
+  클래스와 인스턴스의 
