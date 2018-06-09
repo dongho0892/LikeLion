@@ -195,9 +195,54 @@ element   content   element
 
 
 
-https://www.codecademy.com/courses/learn-html-elements/lessons/intro-to-html/exercises/alts-html?action=resume_content_item&course_redirect=learn-html
+##### Image Alts
+
+* The `alt` attribute, which means alternative text, brings meaning to the images on our sites
+* * If an image fails to load on a web page, a user can mouse over the area originally intended for the image and read a brief description of the image.  
+  * When you include the `alt` attribute, the screen reading software can read the image's description out loud to the visually impaired user. 
+  * The `alt` attribute also plays a role in Search Engine Optimization (SEO), because search engines cannot "see" the images on websites as they crawl the internet. 
+
+````html
+<body>
+  <div id="media">
+   	<h2>Media</h2>
+   	<img src="https://s3.amazonaws.com/codecademy-content/courses/web-101/web101-image_brownbear.jpg" alt="brown bear"/>
+  </div>
+</body>
+````
 
 
 
-이어서 할 부분
+##### Videos
 
+* HTML also supports displaying videos. Like the `<img>` tag, the `<video>` tag requires a `src` attribute with a link to the video source. 
+* * the `<video>` element requires an opening and a closing tag. 
+  *  The `controls` attribute instructs the browser to include basic video controls: pause, play and skip. 
+  * between the opening and closing video tags will only be displayed if the browser is unable to load the video.               # <video> ~~~   실행이 안됩니다. </video>
+
+````html
+<body>
+	<div id="media">
+   		<h2>Media</h2>
+    	<img src="https://s3.amazonaws.com/codecademy-content/courses/web-101/web101-image_brownbear.jpg" alt="A Brown Bear"/>
+        <video src="https://s3.amazonaws.com/codecademy-content/courses/freelance-1/unit-1/lesson-2/htmlcss1-vid_brown-bear.mp4" width="320" height="240" controls>
+          Video not supported
+    	</video>
+  	</div>
+</body>
+````
+
+
+
+# Review
+
+* **HTML** stands for **H**yper**T**ext **M**arkup **L**anguage and is used to create the structure and content of a webpage.
+* Most HTML elements contain opening and closing tags with raw text or other HTML tags between them
+* HTML elements can be nested inside other elements. The enclosed element is the child of the enclosing parent element.
+* Any visible content should be placed within the opening and closing `<body>` tags .
+* Headings and sub-headings, `<h1>` to `<h6>` tags, are used to enlarge text.
+* `<p>`, `<span>` and `<div>` tags specify text or blocks.
+* The `<em>` and `<strong>` tags are used to emphasize text.
+* Line breaks are created with the `<br>` tag.
+* Ordered lists (`<ol>`) are numbered and unordered lists (`<ul>`) are bulleted.
+* Images (`<img>`) and videos (`<video>`) can be added by linking to an existing source.
